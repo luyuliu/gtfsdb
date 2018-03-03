@@ -26,7 +26,7 @@ class BasicModelTests(object):
         url = 'sqlite:///{0}'.format(db_file)
         db = database_load(gtfs_file, url=url)
         log.debug("DATABASE TMP FILE: {0}".format(db_file))
-    except Exception, e:
+    except Exception as e:
         log.warn(e)
         log.warn("couldn't make the BasicModelTests object for some reason")
 
