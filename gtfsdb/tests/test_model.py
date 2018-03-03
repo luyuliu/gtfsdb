@@ -191,7 +191,7 @@ def test_boundaries():
     # bin/python
     args, kwargs = get_args()
     db = Database(**kwargs)
-    ada = db.session.query(Ada)
+    ada = db.session.query(Ada).first()
     district = db.session.query(District)
 
     print ada.intersect(point_far_away)

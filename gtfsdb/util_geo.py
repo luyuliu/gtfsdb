@@ -6,6 +6,9 @@ this is how to add more postgis ST_ functions to geoalchemy2
 from geoalchemy2 import Geometry
 from geoalchemy2.functions import GenericFunction
 
+import logging
+log = logging.getLogger(__name__)
+
 
 class ST_ExteriorRing(GenericFunction):
     name = 'ST_ExteriorRing'
