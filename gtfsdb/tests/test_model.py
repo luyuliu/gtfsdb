@@ -19,12 +19,16 @@ except ImportError:
 
 class BasicModelTests(object):
 
-    path = resource_filename('gtfsdb', 'tests')
-    gtfs_file = 'file:///{0}'.format(os.path.join(path, 'large-sample-feed.zip'))
-    db_file = tempfile.mkstemp()[1]
-    url = 'sqlite:///{0}'.format(db_file)
-    db = database_load(gtfs_file, url=url)
-    log.debug("DATABASE TMP FILE: {0}".format(db_file))
+    try:
+        path = resource_filename('gtfsdb', 'tests')
+        gtfs_file = 'file:///{0}'.format(os.path.join(path, 'large-sample-feed.zip'))
+        db_file = tempfile.mkstemp()[1]
+        url = 'sqlite:///{0}'.format(db_file)
+        db = database_load(gtfs_file, url=url)
+        log.debug("DATABASE TMP FILE: {0}".format(db_file))
+    except Exception, e:
+        log.warn(e)
+        log.warn("couldn't make the BasicModelTests object for some reason")
 
     def get_first(self):
         try:
@@ -170,3 +174,18 @@ class TestShape(unittest.TestCase, BasicModelTests):
 
 class TestTransfer(unittest.TestCase, BasicModelTests):
     model = Transfer
+
+
+def test_boundaries():
+    """
+    run by main, will test boundary intersection in established Geo database, with existing populated boundary tables
+    """
+    print "HI"
+
+
+def main(argv):
+    test_boundaries()
+
+
+if __name__ == "__main__":
+    main(sys.argv)
