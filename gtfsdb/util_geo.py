@@ -22,6 +22,17 @@ class ST_Collect(GenericFunction):
     type = Geometry
 
 
+
+def make_point(lon, lat):
+    point = 'POINT({0} {1})'.format(lon, lat)
+    return point
+
+
+def make_point_srid(lon, lat, srid='4326'):
+    ret_val = 'SRID={0};{1}'.format(srid, make_point(lon, lat))
+    return ret_val
+
+
 def does_point_intersect_geom(point, geom, buffer=0.0):
     """
     return true or false whether point is in / out of the geom

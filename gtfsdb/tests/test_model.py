@@ -180,7 +180,22 @@ def test_boundaries():
     """
     run by main, will test boundary intersection in established Geo database, with existing populated boundary tables
     """
-    print "HI"
+    from gtfsdb.scripts import get_args
+    from gtfsdb import util_geo
+
+    point_in_both  = util_geo.make_point_srid(lat=45.5, lon=-122.5)
+    point_district = util_geo.make_point_srid(lat=45.5, lon=-122.5)
+    point_far_away = util_geo.make_point_srid(lat=45.5, lon=-122.5)
+
+
+    # bin/python
+    args, kwargs = get_args()
+    db = Database(**kwargs)
+    ada = db.session.query(Ada)
+    district = db.session.query(District)
+
+    print ada.intersect(point_far_away)
+    print ada.distance(point_far_away)
 
 
 def main(argv):
